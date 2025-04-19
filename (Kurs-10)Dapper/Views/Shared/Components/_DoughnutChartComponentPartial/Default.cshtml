@@ -1,0 +1,45 @@
+﻿@* @model List<_Kurs_10_Dapper.ViewModels.CityOrderViewModel>
+ *@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Top 10 Şehirlere Göre Sipariş Dağılımı (Doughnut Chart)</div>
+        </div>
+        <div class="card-body">
+            <div class="chart-container" style="width: 300px; height: 300px; margin: auto;">
+                <canvas id="cityDoughnutChart"></canvas>
+            </div>
+        </div>
+        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment4</p>
+    </div>
+</div>
+
+<sc@* ript src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById("cityDoughnutChart").getContext("2d");
+    var cityDoughnutChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Select(x => x.City))),
+            datasets: [{
+                label: "Sipariş Sayısı",
+                data: @Html.Raw(Json.Serialize(Model.Select(x => x.OrderCount))),
+                backgroundColor: [
+                    "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0",
+                    "#9966FF", "#FF9F40", "#C9CBCF", "#00B894",
+                    "#D63031", "#0984E3"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+ *@

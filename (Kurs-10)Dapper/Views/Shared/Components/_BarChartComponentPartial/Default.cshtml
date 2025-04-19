@@ -1,0 +1,61 @@
+﻿@* @model List<_Kurs_10_Dapper.ViewModels.BrandSalesViewModel>
+ *@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Top 10 Markanın Satış Grafiği (Bar Chart)</div>
+        </div>
+        <div class="card-body">
+            <div class="chart-container">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment2</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@* 
+<script>
+    var ctx = document.getElementById('barChart').getContext('2d');
+
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Select(x => x.Brand))),
+            datasets: [{
+                label: 'Toplam Satışlar',
+                data: @Html.Raw(Json.Serialize(Model.Select(x => x.TotalSold))),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            // index'i burada doğru şekilde alıyoruz
+                            var index = context.dataIndex;
+
+                            // Model'den unit verilerini JSON olarak alıp, index ile alıyoruz
+                            var unitData = @Html.Raw(Json.Serialize(Model.Select(x => x.Unit)));
+                            var unit = unitData[index];  // unitData[index] ile doğru birimi alıyoruz
+
+                            // Tooltip'te hem değeri hem de birimi gösteriyoruz
+                            var value = context.raw; // Satış Miktarı (TotalSold)
+                            return `${value} ${unit}`; // Değer ve birimi göstermek
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script> *@

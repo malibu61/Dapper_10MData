@@ -1,0 +1,59 @@
+﻿@* @model List<_Kurs_10_Dapper.ViewModels.GenderAgeGroupViewModel> *@
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">1950-2010 Arası Cinsiyet & Yaş Dağılımı (Multiple Line Chart)</div>
+        </div>
+        <div class="card-body">
+            <div class="chart-container" style="position: relative; height:50vh; width:100%">
+                <canvas id="genderAgeLineChart"></canvas>
+            </div>
+        </div>
+        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment5</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@* 
+<script>
+    var ctx = document.getElementById("genderAgeLineChart").getContext("2d");
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Select(x => x.AgeGroup))),
+            datasets: [
+                {
+                    label: 'Erkek',
+                    data: @Html.Raw(Json.Serialize(Model.Select(x => x.MaleCount))),
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                },
+                {
+                    label: 'Kadın',
+                    data: @Html.Raw(Json.Serialize(Model.Select(x => x.FemaleCount))),
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                }
+            ]
+        },
+        options: {
+            responsive: true, // Grafik boyutunun ekran boyutuna göre uyumlu olmasını sağlar
+            maintainAspectRatio: false, // Yükseklik ve genişlik oranını korumadan, sadece %100 genişlikte olması sağlanır
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true, // Y ekseni sıfırdan başlasın
+                },
+                x: {
+                    // X ekseni için stack özelliği eklenebilir
+                    stacked: true
+                }
+            }
+        }
+    });
+</script>
+ *@

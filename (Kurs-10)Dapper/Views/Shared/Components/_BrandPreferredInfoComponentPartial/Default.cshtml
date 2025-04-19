@@ -1,0 +1,55 @@
+﻿@model List<_Kurs_10_Dapper.ViewModels.BrandPreferenceViewModel>
+@using Newtonsoft.Json
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Top 10 Markanın Satış Grafiği (Bar Chart)</div>
+        </div>
+        <div class="card-body" style="width:400px;height:400px;margin-left:400px">
+            <div class="chart-container" >
+                <canvas  id="radarChart"   ></canvas>
+            </div>
+        </div>
+        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment2</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = @Html.Raw(JsonConvert.SerializeObject(Model.Select(x => x.BRAND)));
+    const dataValues = @Html.Raw(JsonConvert.SerializeObject(Model.Select(x => x.PreferredCount)));
+
+    const ctx = document.getElementById('radarChart').getContext('2d');
+    const radarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Marka Tercih Edilme Sayısı',
+                data: dataValues,
+                backgroundColor: 'rgba(29, 122, 243, 0.2)',
+                borderColor: 'rgba(29, 122, 243, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(29, 122, 243, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true
+                    },
+                    suggestedMin: 0
+                }
+            },
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            }
+        }
+    });
+</script>

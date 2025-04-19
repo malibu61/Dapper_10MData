@@ -1,0 +1,47 @@
+﻿@* @model _Kurs_10_Dapper.ViewModels.PagedSalesViewModel
+ *@
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .page-link {
+        margin: 0 5px;
+        cursor: pointer;
+    }
+</style>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+   @*  <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.NAMESURNAME</td>
+                <td>@item.ITEMNAME</td>
+                <td>@item.AMOUNT</td>
+                <td>@item.TOTALPRICE</td>
+            </tr>
+        }
+    </tbody> *@
+</table>
+@* 
+<!-- Pagination -->
+<div class="pagination">
+    @for (var i = 1; i <= Model.TotalPages; i++)
+    {
+        <a href="javascript:void(0);" class="btn btn-link page-link" data-page="@i">@i</a>
+    }
+</div>
+ *@
