@@ -13,6 +13,8 @@ namespace _Kurs_10_Dapper.Respositories
         Task<List<GenderAgeGroupViewModel>> GetGenderAgeGroupStatsAsync();
         Task<List<GetAllinfoViewModel>> GetAllInfoAsync();
         Task<List<BrandPreferenceViewModel>> BrandPreferenceInfoAsync();
+        Task<List<GetAllinfoViewModel>> SearchProductsAsync(string keyword);
+
 
     }
 }

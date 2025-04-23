@@ -26,16 +26,16 @@ namespace _Kurs_10_Dapper.Respositories
                   ORDER BY PreferredCount DESC OFFSET 3 ROWS FETCH NEXT 10 ROWS ONLY";
 
             using var connection = _context.CreateConnection();
-            var result = (await connection.QueryAsync<BrandPreferenceViewModel>(query)).ToList();
+            var result = (await connection.QueryAsync<BrandPreferenceViewModel>(query, commandTimeout: 300)).ToList();
             return result;
 
         }
 
         public async Task<List<GetAllinfoViewModel>> GetAllInfoAsync()
         {
-            var query = "SELECT TOP 35 ID, DATE_,NAMESURNAME, ITEMNAME, AMOUNT, PRICE, TOTALPRICE, CITY, TOWN FROM SALES";
+            var query = "SELECT ID, DATE_,NAMESURNAME, ITEMNAME, AMOUNT, PRICE, TOTALPRICE, CITY, TOWN FROM SALES";
             var connection = _context.CreateConnection();
-            var values = (await connection.QueryAsync<GetAllinfoViewModel>(query)).ToList();
+            var values = (await connection.QueryAsync<GetAllinfoViewModel>(query, commandTimeout: 300)).ToList();
             return values;
         }
 
@@ -43,7 +43,7 @@ namespace _Kurs_10_Dapper.Respositories
         {
             string query = "SELECT COUNT(*) FROM SALES";
             var connection = _context.CreateConnection();
-            var values = await connection.QueryFirstOrDefaultAsync<int>(query);
+            var values = await connection.QueryFirstOrDefaultAsync<int>(query, commandTimeout: 300);
             return values;
         }
 
@@ -74,7 +74,7 @@ namespace _Kurs_10_Dapper.Respositories
             END
         ORDER BY AgeGroup";
             var connection = _context.CreateConnection();
-            var result = (await connection.QueryAsync<GenderAgeGroupViewModel>(query)).ToList();
+            var result = (await connection.QueryAsync<GenderAgeGroupViewModel>(query, commandTimeout: 300)).ToList();
             return result;
 
         }
@@ -115,7 +115,7 @@ namespace _Kurs_10_Dapper.Respositories
                 OFFSET 3 ROWS FETCH NEXT 10 ROWS ONLY";
 
             var connection = _context.CreateConnection();
-            var result = await connection.QueryAsync<BrandSalesViewModel>(query);
+            var result = await connection.QueryAsync<BrandSalesViewModel>(query, commandTimeout: 300);
             return result.ToList();
 
         }
@@ -127,7 +127,7 @@ namespace _Kurs_10_Dapper.Respositories
                   GROUP BY CITY
                   ORDER BY OrderCount DESC;";
             var connection = _context.CreateConnection();
-            var result = await connection.QueryAsync<CityOrderViewModel>(query);
+            var result = await connection.QueryAsync<CityOrderViewModel>(query, commandTimeout: 300);
             return result.ToList();
         }
 
@@ -160,9 +160,19 @@ namespace _Kurs_10_Dapper.Respositories
                 END
             ORDER BY AgeRange";
             var connection = _context.CreateConnection();
-            var result = await connection.QueryAsync<AgeRangeViewModel>(sql);
+            var result = await connection.QueryAsync<AgeRangeViewModel>(sql, commandTimeout: 300);
             return result.ToList();
         }
 
+        public async Task<List<GetAllinfoViewModel>> SearchProductsAsync(string keyword)
+        {
+            string query = @"SELECT ID, DATE_,NAMESURNAME, ITEMNAME, AMOUNT, PRICE, TOTALPRICE, CITY,                TOWN FROM SALES WHERE NAMESURNAME LIKE @Keyword";
+
+            var parameters = new { Keyword = "%" + keyword + "%" };
+            
+            var connection = _context.CreateConnection();
+            var result = await connection.QueryAsync<GetAllinfoViewModel>(query, parameters, commandTimeout: 300);
+            return result.ToList();
+        }
     }
 }

@@ -1,5 +1,5 @@
-﻿@* @model _Kurs_10_Dapper.ViewModels.PagedSalesViewModel
- *@
+﻿@model _Kurs_10_Dapper.ViewModels.PagedSalesViewModel
+
 <style>
     .pagination {
         display: flex;
@@ -23,7 +23,7 @@
             <th>Total Price</th>
         </tr>
     </thead>
-   @*  <tbody>
+    <tbody>
         @foreach (var item in Model.Items)
         {
             <tr>
@@ -34,9 +34,9 @@
                 <td>@item.TOTALPRICE</td>
             </tr>
         }
-    </tbody> *@
+    </tbody> 
 </table>
-@* 
+
 <!-- Pagination -->
 <div class="pagination">
     @for (var i = 1; i <= Model.TotalPages; i++)
@@ -44,4 +44,3 @@
         <a href="javascript:void(0);" class="btn btn-link page-link" data-page="@i">@i</a>
     }
 </div>
- *@

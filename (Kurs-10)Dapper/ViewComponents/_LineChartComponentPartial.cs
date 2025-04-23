@@ -16,7 +16,7 @@ namespace _Kurs_10_Dapper.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var salesData = await _salesRepository.GetMonthlySalesAsync(); // Veriyi alıyoruz
+            var salesData = await _salesRepository.GetMonthlySalesAsync();
 
             var apiKey = "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";
 
@@ -54,7 +54,7 @@ namespace _Kurs_10_Dapper.ViewComponents
 
                 var result = JsonSerializer.Deserialize<JsonElement>(responseString);
                 var answer = result.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
-                ViewBag.Comment = answer;
+                ViewBag.Comment1 = answer;
             }
 
             else
@@ -62,9 +62,6 @@ namespace _Kurs_10_Dapper.ViewComponents
                 Console.WriteLine($"A Failure Occured: {response.StatusCode}");
                 Console.WriteLine(responseString);
             }
-
-
-
 
             return View(salesData);
 

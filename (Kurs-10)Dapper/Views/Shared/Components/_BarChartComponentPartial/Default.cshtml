@@ -1,13 +1,13 @@
-﻿@* @model List<_Kurs_10_Dapper.ViewModels.BrandSalesViewModel>
- *@
+﻿@model List<_Kurs_10_Dapper.ViewModels.BrandSalesViewModel>
+
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
             <div class="card-title">Top 10 Markanın Satış Grafiği (Bar Chart)</div>
         </div>
         <div class="card-body">
-            <div class="chart-container">
-                <canvas id="barChart"></canvas>
+            <div class="chart-container" >
+                <canvas id="barChart" style="height:600px;width:auto;"></canvas>
             </div>
         </div>
         <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment2</p>
@@ -15,7 +15,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@* 
+
 <script>
     var ctx = document.getElementById('barChart').getContext('2d');
 
@@ -36,7 +36,7 @@
             plugins: {
                 tooltip: {
                     callbacks: {
-                        label: function (context) {
+                        label: function (context) { // Çubukların üzerine gelince gösterilecek değer
                             // index'i burada doğru şekilde alıyoruz
                             var index = context.dataIndex;
 
@@ -58,4 +58,4 @@
             }
         }
     });
-</script> *@
+</script>

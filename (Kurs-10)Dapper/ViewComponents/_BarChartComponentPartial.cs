@@ -16,72 +16,54 @@ namespace _Kurs_10_Dapper.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //var salesData = await _salesRepository.GetSalesDataByBrand(); // Veriyi al
+            var salesData = await _salesRepository.GetSalesDataByBrand(); // Veriyi al
 
-            //if (salesData == null || !salesData.Any())
-            //{
-            //    Console.WriteLine("Veri Gelmedi!");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Veri Geldi: " + salesData.Count);
-            //}
+            var apiKey = "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";
 
-            //var apiKey = "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";
+            using var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
 
-            //using var httpClient = new HttpClient();
-            //httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
-
-            //var top10Brand = string.Join(", ", salesData.Select(s => $"{s.Brand}: {s.TotalSold}"));
+            var top10Brand = string.Join(", ", salesData.Select(s => $"{s.Brand}: {s.TotalSold}"));
 
 
-            //var requestBody = new
-            //{
-            //    model = "gpt-3.5-turbo",
-            //    messages = new[]
-            //    {
-            //    new { role = "system", content = "You are an interpretive statistician. " },
-            //    new { role = "user", content = "Bununla alakalı analiz yap ve iyileştirme için fikir ver.Cevabı Türkçe ver (maks 500 karakter)(Top10 Markaya ait satışlar bunlar):"+top10Brand },
-            //},
+            var requestBody = new
+            {
+                model = "gpt-3.5-turbo",
+                messages = new[]
+                {
+                new { role = "system", content = "You are an interpretive statistician. " },
+                new { role = "user", content = "Bununla alakalı analiz yap ve iyileştirme için fikir ver.Cevabı Türkçe ver (maks 500 karakter)(Top10 Markaya ait satışlar bunlar):"+top10Brand },
+            },
 
-            //    max_tokens = 1000// dönecek olan cevabın karakter uzunluğu gibi birşey, cevabın uzunluğunu etkiliyor
+                max_tokens = 1000// dönecek olan cevabın karakter uzunluğu
 
-            //};
-
-
-            //var json = JsonSerializer.Serialize(requestBody);
-            //var content = new StringContent(json, Encoding.UTF8, "application/json");
+            };
 
 
-            //try
-            //{
-            //    var response = await httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);
+            var json = JsonSerializer.Serialize(requestBody);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            //    var responseString = await response.Content.ReadAsStringAsync();
+            var response = await httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);
 
-            //    if (response.IsSuccessStatusCode)
-            //    {
+            var responseString = await response.Content.ReadAsStringAsync();
 
-            //        var result = JsonSerializer.Deserialize<JsonElement>(responseString);
-            //        var answer = result.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
-            //        ViewBag.Comment2 = answer;
-            //    }
+            if (response.IsSuccessStatusCode)
+            {
 
-            //    else
-            //    {
-            //        Console.WriteLine($"A Failure Occured: {response.StatusCode}");
-            //        Console.WriteLine(responseString);
-            //    }
+                var result = JsonSerializer.Deserialize<JsonElement>(responseString);
+                var answer = result.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
+                ViewBag.Comment2 = answer;
+            }
+
+            else
+            {
+                Console.WriteLine($"A Failure Occured: {response.StatusCode}");
+                Console.WriteLine(responseString);
+            }
 
 
-            //}
-            //catch (Exception ex)
-            //{
 
-            //    Console.WriteLine($"A Failure Occured: {ex.Message}");
-            //}
-
-            return View(/*salesData*/); // Veriyi view'a gönder
+            return View(salesData);
 
         }
     }

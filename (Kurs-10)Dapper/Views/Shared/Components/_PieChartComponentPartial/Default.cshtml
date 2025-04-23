@@ -1,4 +1,4 @@
-﻿@* @model List<_Kurs_10_Dapper.ViewModels.AgeRangeViewModel> *@
+﻿@model List<_Kurs_10_Dapper.ViewModels.AgeRangeViewModel>
 
 <div class="col-md-12">
     <div class="card">
@@ -10,13 +10,13 @@
                 <canvas id="agePieChart"></canvas>
             </div>
         </div>
-        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment3</p>
+        <p style="margin: 0 50px 0 50px;">    🧠 AI Yorumu: @ViewBag.Comment3</p>
     </div>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@* 
+
 
 <script>
     var ctx = document.getElementById("agePieChart").getContext("2d");
@@ -43,4 +43,3 @@
         }
     });
 </script>
- *@

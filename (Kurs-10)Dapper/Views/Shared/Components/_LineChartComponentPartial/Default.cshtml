@@ -1,4 +1,4 @@
-﻿@* @model List<_Kurs_10_Dapper.ViewModels.MonthlySalesViewModel> *@
+﻿@model List<_Kurs_10_Dapper.ViewModels.MonthlySalesViewModel>
 
 <div class="col-md-12">
     <div class="card">
@@ -10,13 +10,13 @@
                 <canvas id="lineChart"></canvas>
             </div>
         </div>
-        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment</p>
+        <p style="margin: 0 50px 50px 50px;">    🧠 AI Yorumu: @ViewBag.Comment1</p>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-@* 
+
 <script>
     var lineChart = document.getElementById("lineChart").getContext("2d");
 
@@ -64,4 +64,3 @@
         }
     });
 </script>
- *@
