@@ -33,6 +33,5 @@ namespace _Kurs_10_Dapper.Controllers
 
             return View(pagedSales);
         }
-
     }
 }

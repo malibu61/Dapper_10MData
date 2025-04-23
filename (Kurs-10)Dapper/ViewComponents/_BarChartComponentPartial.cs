@@ -61,8 +61,6 @@ namespace _Kurs_10_Dapper.ViewComponents
                 Console.WriteLine(responseString);
             }
 
-
-
             return View(salesData);
 
         }

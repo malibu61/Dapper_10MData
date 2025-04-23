@@ -79,7 +79,6 @@ namespace _Kurs_10_Dapper.Respositories
 
         }
 
-        // Aylık satışları alır
         public async Task<List<MonthlySalesViewModel>> GetMonthlySalesAsync()
         {
             string query = @"SELECT 

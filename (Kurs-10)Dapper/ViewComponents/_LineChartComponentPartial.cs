@@ -44,7 +44,6 @@ namespace _Kurs_10_Dapper.ViewComponents
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
 
-
             var response = await httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);
 
             var responseString = await response.Content.ReadAsStringAsync();
