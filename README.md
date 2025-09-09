@@ -11,6 +11,7 @@ I developed a dashboard to visualize large-scale sales data through a web interf
 📈Chart.js, LINQ & SQL
 🧩ViewComponent, ViewModel
 📑Pagination
+
 📈 Focused Statistics:
 👥Analysis based on age, gender and city
 🛍️Brand and product preferences
