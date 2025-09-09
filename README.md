@@ -5,15 +5,24 @@ This Project is a data-intensive project developed with Dapper and ASP.NET Core 
 I developed a dashboard to visualize large-scale sales data through a web interface. I used modern charts (Pie, Bar, Doughnut, Radar, Bubble) and added pagination support. Additionally, I integrated OpenAI API for AI-powered data analysis and made meaningful statistical insights from the data. I also added a searching feature to allow users to search data more quickly and efficiently.
 
 🧰 Technologies & Tools:
+
 💻ASP.NET Core MVC (6.0)
+
 🗄️Dapper, SQL Server
+
 🧠OpenAI API (AI-powered analysis)
+
 📈Chart.js, LINQ & SQL
+
 🧩ViewComponent, ViewModel
+
 📑Pagination
 
+
 📈 Focused Statistics:
+
 👥Analysis based on age, gender and city
+
 🛍️Brand and product preferences
 
 📍 Kaggle: https://www.kaggle.com/datasets/omercolakoglu/10million-rows-turkish-market-sales-dataset
